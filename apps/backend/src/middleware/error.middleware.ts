@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
+import { config } from '@/config/app';
 import { logger } from '@/shared/logger';
 import { error as errorResponse } from '@/shared/response';
 
@@ -11,10 +12,5 @@ export const errorMiddleware = (err: any, req: Request, res: Response, _next: Ne
     logger.error({ err, reqId: req.reqId }, 'Unhandled exception');
   }
 
-  errorResponse(
-    res,
-    message,
-    statusCode,
-    process.env.NODE_ENV === 'development' ? err.stack : undefined,
-  );
+  errorResponse(res, message, statusCode, config.isDev ? err.stack : undefined);
 };

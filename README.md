@@ -132,5 +132,34 @@ APIMeter utilizes **Vitest** as the core test runner for both Frontend and Backe
 ### Running Tests
 
 - `pnpm test`: Execute all tests in the workspace (single run).
-- `pnpm test:watch`: Run all tests in interactive watch mode (perfect for TDD).
 - `pnpm test:coverage`: Generate a comprehensive V8 coverage report for the workspace.
+
+## Environment Configuration
+
+APIMeter utilizes a type-safe environment configuration powered by **Zod**. If any required environment variable is missing or improperly formatted, the application will fail fast on startup.
+
+### Setting Up Your Environment
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Populate the `.env` file with your actual secrets and URLs. **Never commit `.env` to version control.**
+
+### Required Variables
+
+**Backend:**
+
+- `NODE_ENV`: Application environment (`development`, `production`, `test`)
+- `PORT`: Server port
+- `DATABASE_URL`: Primary PostgreSQL connection string
+- `DIRECT_URL`: Direct PostgreSQL connection string (useful for Prisma migrations if using connection poolers)
+- `JWT_SECRET`: Minimum 32-character secret for JWT signing
+- `JWT_REFRESH_SECRET`: Minimum 32-character secret for JWT refresh token signing
+- `CLIENT_URL`: Allowed origin for CORS
+- `LOG_LEVEL`: Logging verbosity (`fatal`, `error`, `warn`, `info`, `debug`, `trace`)
+
+**Frontend:**
+
+- `NEXT_PUBLIC_API_URL`: The URL of the backend API
+- `NEXT_PUBLIC_APP_NAME`: Name of the application

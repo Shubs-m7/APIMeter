@@ -1,5 +1,7 @@
+import { env } from './env';
+
 export const APP_CONFIG = {
-  name: 'APIMeter',
+  name: env.NEXT_PUBLIC_APP_NAME,
   version: '1.2',
-  apiUrl: process.env.NEXT_PUBLIC_API_URL,
+  apiUrl: env.NEXT_PUBLIC_API_URL,
 };

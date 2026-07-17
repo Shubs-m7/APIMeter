@@ -5,6 +5,7 @@ import express from 'express';
 import helmet from 'helmet';
 import pinoHttp from 'pino-http';
 
+import { config } from '@/config/app';
 import { checkDatabaseHealth } from '@/config/database';
 import { errorMiddleware } from '@/middleware/error.middleware';
 import { notFoundMiddleware } from '@/middleware/not-found.middleware';
@@ -30,7 +31,7 @@ app.get('/health', async (_req, res) => {
     database: isDbHealthy ? 'connected' : 'disconnected',
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
+    environment: config.env,
   });
 });
 
