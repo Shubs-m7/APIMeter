@@ -12,6 +12,11 @@
     "lint": {},
     "typecheck": {},
     "test": {},
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:coverage": {},
     "clean": {
       "cache": false
     }

@@ -113,3 +113,24 @@ To bypass the hooks, append the `--no-verify` flag to your commit command:
 ```bash
 git commit -m "fix(critical): emergency patch" --no-verify
 ```
+
+## Testing Philosophy
+
+APIMeter utilizes **Vitest** as the core test runner for both Frontend and Backend, maximizing mono-repo compatibility and speed.
+
+### Backend Testing (`apps/backend/tests`)
+
+- **Unit Tests**: Focus on utility functions, error classes, and isolated pure logic.
+- **Integration Tests**: Leverage `supertest` to test complete API flows without needing to deploy the server.
+- **Coverage**: V8 coverage enabled across `src/**`.
+
+### Frontend Testing (`apps/frontend/tests`)
+
+- **Unit Tests**: Component isolation testing utilizing `React Testing Library` (RTL) over `jsdom`.
+- **Custom Renderers**: All custom hooks and providers are wrapped natively via `test-utils.tsx`.
+
+### Running Tests
+
+- `pnpm test`: Execute all tests in the workspace (single run).
+- `pnpm test:watch`: Run all tests in interactive watch mode (perfect for TDD).
+- `pnpm test:coverage`: Generate a comprehensive V8 coverage report for the workspace.
