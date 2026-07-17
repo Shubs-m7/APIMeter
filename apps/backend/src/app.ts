@@ -1,3 +1,4 @@
+import { checkDatabaseHealth } from "@/config/database";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -21,9 +22,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/health", (_req, res) => {
+app.get("/health", async (_req, res) => {
+  const isDbHealthy = await checkDatabaseHealth();
   success(res, {
     status: "ok",
+    database: isDbHealthy ? "connected" : "disconnected",
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,

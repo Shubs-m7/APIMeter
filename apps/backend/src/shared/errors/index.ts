@@ -46,3 +46,21 @@ export class InternalServerError extends AppError {
   }
 }
 
+
+export class DatabaseConnectionError extends AppError {
+  constructor(message = "Database connection failed") {
+    super(message, 503, false);
+  }
+}
+
+export class PrismaError extends AppError {
+  constructor(message = "Database operation failed") {
+    super(message, 500, false);
+  }
+}
+
+export class DatabaseTimeoutError extends AppError {
+  constructor(message = "Database operation timed out") {
+    super(message, 504, false);
+  }
+}
