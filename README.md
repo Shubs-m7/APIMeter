@@ -8,7 +8,7 @@ APIMeter is a scalable platform designed to manage API keys and track usage in r
 
 ## Architecture
 
-This project is structured as a **Turborepo** monorepo using **pnpm**. 
+This project is structured as a **Turborepo** monorepo using **pnpm**.
 
 ### Folder Structure
 
@@ -71,6 +71,7 @@ apimeter/
 ## Development Workflow
 
 We use standard Turborepo commands for development:
+
 - `pnpm dev`: Start all apps in development mode.
 - `pnpm build`: Build all apps and packages.
 - `pnpm lint`: Run ESLint across the workspace.

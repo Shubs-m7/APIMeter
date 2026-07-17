@@ -1,4 +1,5 @@
 # Software Requirements Specification (SRS)
+
 **Project Name:** APIMeter
 **Version:** 1.0.0
 **Status:** Draft
@@ -6,24 +7,28 @@
 ---
 
 ## 1 Executive Summary
+
 **Purpose:** This document specifies the complete software requirements for APIMeter, guiding frontend and backend engineering teams in building a secure, scalable API key management platform.
 **Scope:** Covers Version 1.0 features: Authentication, Project Management, API Key Generation/Revocation, and Usage Analytics.
 **Objectives:** Provide an unambiguous technical blueprint that adheres to the PRD and Global Engineering Rules.
 **Audience:** Software Engineers, DevOps, QA, and Product Owners.
 **Definitions:**
+
 - **Key:** A cryptographic string used to authenticate API requests.
 - **Roll:** Generating a new API key while keeping the old one active for a grace period.
-**Abbreviations:**
+  **Abbreviations:**
 - **PRD:** Product Requirements Document
 - **RBAC:** Role-Based Access Control
-**References:** APIMeter PRD v1.0.0.
+  **References:** APIMeter PRD v1.0.0.
 
 ---
 
 ## 2 System Overview
+
 APIMeter uses a decoupled, serverless architecture deployed on Vercel.
 
 **High-Level Architecture:**
+
 ```mermaid
 graph TD
     Client[Client Browser] -->|HTTPS| Frontend[Next.js Frontend]
@@ -34,6 +39,7 @@ graph TD
 ```
 
 **System Components:**
+
 - **Frontend:** Next.js 16 (App Router), React 19, Tailwind CSS, Shadcn UI, Zustand, TanStack Query.
 - **Backend:** Next.js 16 (Separate Repo/Folder), exposing REST APIs.
 - **Database:** Neon PostgreSQL (Serverless).
@@ -46,6 +52,7 @@ graph TD
 ## 3 Functional Requirements
 
 ### 3.1 Authentication
+
 - **Description:** Handle user identity.
 - **Inputs:** Email, Password, OAuth Tokens.
 - **Outputs:** JWT Session Token, User Profile.
@@ -57,6 +64,7 @@ graph TD
 - **Priority:** Must Have.
 
 ### 3.2 Dashboard
+
 - **Description:** Landing view post-login showing high-level stats.
 - **Inputs:** `projectId`, `dateRange`.
 - **Outputs:** Aggregated JSON stats (total requests, active keys, error rate).
@@ -67,6 +75,7 @@ graph TD
 - **Priority:** Must Have.
 
 ### 3.3 Projects
+
 - **Description:** Organizational boundaries for keys.
 - **Inputs:** Project Name, Description.
 - **Outputs:** `Project` object.
@@ -77,6 +86,7 @@ graph TD
 - **Priority:** Must Have.
 
 ### 3.4 API Keys
+
 - **Description:** The core generation and management of keys.
 - **Inputs:** Key Name, Expiry Date, `projectId`.
 - **Outputs:** Generated Key (once), Key Metadata.
@@ -87,6 +97,7 @@ graph TD
 - **Priority:** Must Have.
 
 ### 3.5 Request Logs
+
 - **Description:** Ingesting and querying API usage logs.
 - **Inputs:** Filter params (keyId, statusCode, dateRange).
 - **Outputs:** Paginated list of log entries.
@@ -96,6 +107,7 @@ graph TD
 - **Priority:** Should Have.
 
 ### 3.6 Analytics
+
 - **Description:** Processed log data for charting.
 - **Inputs:** Timeframe (24h, 7d, 30d).
 - **Outputs:** Time-series data points.
@@ -103,26 +115,31 @@ graph TD
 - **Priority:** Must Have.
 
 ### 3.7 Activity Logs
+
 - **Description:** Internal audit trails (who did what).
 - **Inputs:** Action type (e.g., `KEY_CREATED`).
 - **Outputs:** Audit log feed.
 - **Priority:** Should Have.
 
 ### 3.8 Search
+
 - **Description:** Global search for keys and projects.
 - **Priority:** Should Have.
 
 ### 3.9 Settings
+
 - **Description:** Workspace configurations and limits.
 - **Priority:** Must Have.
 
 ### 3.10 Profile
+
 - **Description:** User account management.
 - **Priority:** Must Have.
 
 ---
 
 ## 4 Non Functional Requirements
+
 - **Performance:** APIs must resolve in < 200ms. Key Validation API < 50ms (P95).
 - **Security:** Zero plaintext keys in DB.
 - **Reliability:** 99.9% API uptime.
@@ -137,6 +154,7 @@ graph TD
 ---
 
 ## 5 Authentication Requirements
+
 - **Registration:** Email/Password and GitHub OAuth.
 - **Login:** Rate-limited to 5 failed attempts per 15 minutes.
 - **Logout:** Invalidates server-side session.
@@ -149,19 +167,21 @@ graph TD
 ---
 
 ## 6 Authorization Matrix
-| Module | Owner | Admin | Member | Viewer |
-| :--- | :--- | :--- | :--- | :--- |
-| **Projects** | Manage | Read, Update | Read | Read |
-| **API Keys** | Manage | Manage | Read, Create | Read |
-| **Request Logs** | Read | Read | Read | Read |
-| **Settings** | Manage | Update | Read | None |
-| **Team/RBAC** | Manage | None | None | None |
-| **Billing** | Manage | None | None | None |
-*(Manage = Create, Read, Update, Delete, Export)*
+
+| Module                                            | Owner  | Admin        | Member       | Viewer |
+| :------------------------------------------------ | :----- | :----------- | :----------- | :----- |
+| **Projects**                                      | Manage | Read, Update | Read         | Read   |
+| **API Keys**                                      | Manage | Manage       | Read, Create | Read   |
+| **Request Logs**                                  | Read   | Read         | Read         | Read   |
+| **Settings**                                      | Manage | Update       | Read         | None   |
+| **Team/RBAC**                                     | Manage | None         | None         | None   |
+| **Billing**                                       | Manage | None         | None         | None   |
+| _(Manage = Create, Read, Update, Delete, Export)_ |
 
 ---
 
 ## 7 Validation Rules
+
 - **Email:** Standard RFC 5322 regex.
 - **Password:** Min 8 chars, 1 uppercase, 1 number.
 - **Project Name:** 3-50 chars, alphanumeric and spaces.
@@ -174,6 +194,7 @@ graph TD
 ---
 
 ## 8 Error Handling
+
 - **Validation Errors:** HTTP 400. Returns field-level error arrays (Zod format).
 - **Authentication Errors:** HTTP 401. Generic "Invalid credentials" message.
 - **Authorization Errors:** HTTP 403. "Insufficient permissions."
@@ -185,6 +206,7 @@ graph TD
 ---
 
 ## 9 API Behaviour
+
 - **Pagination:** Cursor-based for logs (high volume), Offset-based for projects.
 - **Filtering:** Passed as query params (e.g., `?status=active`).
 - **Sorting:** `?sort=createdAt&order=desc`.
@@ -202,6 +224,7 @@ graph TD
 ---
 
 ## 10 Database Behaviour (PostgreSQL)
+
 - **Transactions:** Required when rotating a key (Revoke old + Create new).
 - **Indexes:** B-Tree on `projectId`, `userId`. BRIN or partitioned indexes on `RequestLog.createdAt`.
 - **Constraints:** Foreign keys with `ON DELETE CASCADE` for Projects -> Keys.
@@ -212,6 +235,7 @@ graph TD
 ---
 
 ## 11 Logging Requirements
+
 - **Application Logs:** Pino JSON output to stdout. Levels: `info`, `warn`, `error`, `debug`.
 - **Audit Logs:** Stored in DB table `AuditLog` for security events (login, key gen).
 - **Security Logs:** Failed logins and 403s explicitly flagged.
@@ -220,6 +244,7 @@ graph TD
 ---
 
 ## 12 Security Requirements
+
 - **Password Hashing:** `bcryptjs` (cost factor 12).
 - **Session Security:** `next-auth` JWT encrypted with `NEXTAUTH_SECRET`. Secure cookies flag enforced in production.
 - **Input Validation:** 100% Zod schema coverage.
@@ -233,6 +258,7 @@ graph TD
 ---
 
 ## 13 Performance Requirements
+
 - **Dashboard:** TanStack Query caching for instant sub-sequent navigation.
 - **Analytics:** Database views or materialized views if queries exceed 500ms.
 - **Search:** Debounced input (300ms) on frontend.
@@ -242,6 +268,7 @@ graph TD
 ---
 
 ## 14 Accessibility Requirements
+
 - **Keyboard Navigation:** Full support for Tab indexing.
 - **Focus States:** Distinct focus rings for all interactive elements.
 - **Contrast:** WCAG AA ratio (4.5:1) for text.
@@ -251,6 +278,7 @@ graph TD
 ---
 
 ## 15 Browser Support
+
 - **Chrome:** Last 2 versions.
 - **Edge:** Last 2 versions.
 - **Firefox:** Last 2 versions.
@@ -260,6 +288,7 @@ graph TD
 ---
 
 ## 16 Deployment Requirements
+
 - **Frontend:** Vercel (Auto-deploy on `main` branch).
 - **Backend:** Vercel (Auto-deploy, Edge functions where applicable).
 - **Database:** Neon DB branching integrated with Vercel Preview Deployments.
@@ -269,6 +298,7 @@ graph TD
 ---
 
 ## 17 Monitoring Requirements
+
 - **Health Checks:** `/api/health` endpoint returning `200 OK`.
 - **Application Logs:** Forwarded from Vercel to DataDog / Axiom.
 - **Database Monitoring:** Neon dashboard for CPU, RAM, active connections.
@@ -277,6 +307,7 @@ graph TD
 ---
 
 ## 18 Future Enhancements (Post V1.0)
+
 - **Webhooks:** Trigger external events on key creation/revocation.
 - **Team Management:** Advanced granular RBAC and SSO.
 - **Billing:** Stripe integration for charging based on request volume.
@@ -287,6 +318,7 @@ graph TD
 ---
 
 ## 19 Technical Constraints
+
 - **Time:** MVP in 4-6 weeks.
 - **Budget:** Zero-infrastructure cost initially (Vercel/Neon free tiers).
 - **Technology:** Must adhere to Next.js App Router paradigm. No custom Express servers.
@@ -295,10 +327,12 @@ graph TD
 ---
 
 ## 20 Assumptions
+
 1. Frontend and Backend deploy independently but share data models conceptually.
 2. Vercel Serverless can maintain < 50ms latency for API Key validation using Redis cache.
 3. Users have a modern browser with JavaScript enabled.
 4. Neon's free tier provides sufficient storage for MVP request logging (approx 500MB).
 
 ---
-*End of Document*
+
+_End of Document_

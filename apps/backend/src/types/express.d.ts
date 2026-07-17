@@ -3,4 +3,3 @@ declare namespace Express {
     reqId: string;
   }
 }
-

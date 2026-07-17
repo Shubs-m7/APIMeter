@@ -10,4 +10,5 @@ This folder contains the Prisma ORM configuration for APIMeter.
 - **Open Studio:** pnpm prisma:studio
 
 ## Environment Variables
+
 Ensure DATABASE_URL and DIRECT_URL (for Neon) are present in your .env file.

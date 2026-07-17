@@ -1,1 +1,3 @@
-export interface AnalyticsDTO { totalRequests: number; }
+export interface AnalyticsDTO {
+  totalRequests: number;
+}

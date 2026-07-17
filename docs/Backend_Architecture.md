@@ -41,6 +41,7 @@ The backend is divided into strict feature modules inside `src/modules/` to prev
 ### Standard Module Layout
 
 Each module follows this exact structure:
+
 ```text
 module-name/
 ├── module.controller.ts  # Handles HTTP req/res and delegates to service
@@ -52,24 +53,30 @@ module-name/
 ```
 
 ### 1. Auth Module
-*   **Responsibilities:** Authentication APIs, Session/JWT validation, Password hashing.
-*   *Note: Frontend is responsible for the Login/Register UI, but Backend issues the tokens and maintains session security.*
+
+- **Responsibilities:** Authentication APIs, Session/JWT validation, Password hashing.
+- _Note: Frontend is responsible for the Login/Register UI, but Backend issues the tokens and maintains session security._
 
 ### 2. Projects Module
-*   **Responsibilities:** Tenant isolation, Project CRUD, handling URL-safe `slugs`.
+
+- **Responsibilities:** Tenant isolation, Project CRUD, handling URL-safe `slugs`.
 
 ### 3. API Keys Module
-*   **Responsibilities:** Key Generation, Hashing, Revocation, Edge Validation.
-*   **Security Rule:** Keys are immediately hashed upon generation. The incoming plaintext key is hashed and strictly compared against the `hashedKey` in the DB.
+
+- **Responsibilities:** Key Generation, Hashing, Revocation, Edge Validation.
+- **Security Rule:** Keys are immediately hashed upon generation. The incoming plaintext key is hashed and strictly compared against the `hashedKey` in the DB.
 
 ### 4. API Requests Module
-*   **Responsibilities:** Ingesting high-velocity telemetry data from API consumers.
+
+- **Responsibilities:** Ingesting high-velocity telemetry data from API consumers.
 
 ### 5. Analytics Module
-*   **Responsibilities:** Aggregating time-series data via an Aggregation Layer that safely queries API Requests without exposing raw table data.
+
+- **Responsibilities:** Aggregating time-series data via an Aggregation Layer that safely queries API Requests without exposing raw table data.
 
 ### 6. Settings Module
-*   **Responsibilities:** Split internally into Profile and Preferences management.
+
+- **Responsibilities:** Split internally into Profile and Preferences management.
 
 ---
 
@@ -104,16 +111,17 @@ backend/
 
 ## SECTION 5 — Dependency Rules
 
-| From Layer | To Layer | Allowed? |
-| :--- | :--- | :--- |
-| **Controller** | **Service** | ✅ Yes |
-| **Controller** | **Prisma (Direct)** | ❌ No |
+| From Layer     | To Layer            | Allowed? |
+| :------------- | :------------------ | :------- |
+| **Controller** | **Service**         | ✅ Yes   |
+| **Controller** | **Prisma (Direct)** | ❌ No    |
 
 ---
 
 ## SECTION 6 — Server Bootstrap & Middleware
 
 ### Application Bootstrapping (`app.ts` -> `server.ts`)
+
 1. **Express App Instantiation**
 2. **Configuration:** Environment variables validated via `@t3-oss/env-core`.
 3. **Global Middleware:** `helmet`, `cors`, `compression`, `cookie-parser`, `pino-http`.
@@ -123,29 +131,32 @@ backend/
 7. **Server Listen:** Bind to port (via `server.ts`).
 
 ### Shared Middleware
-*   **Authentication:** Verifies JWT/Sessions and attaches user context to `req.user`.
-*   **Authorization:** RBAC and ownership checks.
-*   **Validation:** Express middleware that intercepts requests and validates `req.body`/`req.query` using Zod schemas.
-*   **Error Handler:** Formats custom application errors into standardized JSON responses.
-*   **Request Logger:** `pino-http` for structured JSON logging.
-*   **Rate Limiter:** *(Future implementation)*
+
+- **Authentication:** Verifies JWT/Sessions and attaches user context to `req.user`.
+- **Authorization:** RBAC and ownership checks.
+- **Validation:** Express middleware that intercepts requests and validates `req.body`/`req.query` using Zod schemas.
+- **Error Handler:** Formats custom application errors into standardized JSON responses.
+- **Request Logger:** `pino-http` for structured JSON logging.
+- **Rate Limiter:** _(Future implementation)_
 
 ---
 
 ## SECTION 7 — Testing Strategy
 
-*   **Framework:** `Vitest` for fast, native TypeScript testing.
-*   **Integration:** `Supertest` is used to mock Express HTTP requests during integration tests.
-*   **Scope:** Services are unit tested in isolation. Controllers/Routes are integration tested via Supertest.
+- **Framework:** `Vitest` for fast, native TypeScript testing.
+- **Integration:** `Supertest` is used to mock Express HTTP requests during integration tests.
+- **Scope:** Services are unit tested in isolation. Controllers/Routes are integration tested via Supertest.
 
 ---
 
 ## SECTION 8 — BACKEND DECISIONS (Architecture Decision Records)
 
-*(Generated from Architecture Revision v1.2)*
-*   **ADR-BE-6:** Framework migration from Next.js API Routes to Express.js. **Reason:** To decouple the backend completely from the frontend framework, allowing for better scalability, traditional middleware pipelines, and strict REST boundaries. **Status:** Approved.
-*   **ADR-BE-7:** Adoption of Pino for logging. **Reason:** High-performance, structured JSON logging ideal for backend microservices. **Status:** Approved.
-*   **ADR-BE-8:** Removal of Repository Layer. **Reason:** Prisma's strongly-typed client effectively acts as the repository. Wrapping it adds unnecessary boilerplate in a feature-first architecture. **Status:** Approved.
+_(Generated from Architecture Revision v1.2)_
+
+- **ADR-BE-6:** Framework migration from Next.js API Routes to Express.js. **Reason:** To decouple the backend completely from the frontend framework, allowing for better scalability, traditional middleware pipelines, and strict REST boundaries. **Status:** Approved.
+- **ADR-BE-7:** Adoption of Pino for logging. **Reason:** High-performance, structured JSON logging ideal for backend microservices. **Status:** Approved.
+- **ADR-BE-8:** Removal of Repository Layer. **Reason:** Prisma's strongly-typed client effectively acts as the repository. Wrapping it adds unnecessary boilerplate in a feature-first architecture. **Status:** Approved.
 
 ---
-*End of Backend Architecture Specification*
+
+_End of Backend Architecture Specification_

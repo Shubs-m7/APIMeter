@@ -17,50 +17,49 @@ export class ValidationError extends AppError {
 }
 
 export class UnauthorizedError extends AppError {
-  constructor(message = "Unauthorized") {
+  constructor(message = 'Unauthorized') {
     super(message, 401);
   }
 }
 
 export class ForbiddenError extends AppError {
-  constructor(message = "Forbidden") {
+  constructor(message = 'Forbidden') {
     super(message, 403);
   }
 }
 
 export class NotFoundError extends AppError {
-  constructor(message = "Resource not found") {
+  constructor(message = 'Resource not found') {
     super(message, 404);
   }
 }
 
 export class ConflictError extends AppError {
-  constructor(message = "Conflict") {
+  constructor(message = 'Conflict') {
     super(message, 409);
   }
 }
 
 export class InternalServerError extends AppError {
-  constructor(message = "Internal server error") {
+  constructor(message = 'Internal server error') {
     super(message, 500, false);
   }
 }
 
-
 export class DatabaseConnectionError extends AppError {
-  constructor(message = "Database connection failed") {
+  constructor(message = 'Database connection failed') {
     super(message, 503, false);
   }
 }
 
 export class PrismaError extends AppError {
-  constructor(message = "Database operation failed") {
+  constructor(message = 'Database operation failed') {
     super(message, 500, false);
   }
 }
 
 export class DatabaseTimeoutError extends AppError {
-  constructor(message = "Database operation timed out") {
+  constructor(message = 'Database operation timed out') {
     super(message, 504, false);
   }
 }

@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from "@/providers/providers";
-import { APP_CONSTANTS } from "@/constants/app";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+import './globals.css';
+import { APP_CONSTANTS } from '@/constants/app';
+import { Providers } from '@/providers/providers';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: {
@@ -15,15 +16,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: APP_CONSTANTS.TITLE,
     description: APP_CONSTANTS.DESCRIPTION,
-    type: "website",
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: APP_CONSTANTS.TITLE,
     description: APP_CONSTANTS.DESCRIPTION,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: '/favicon.ico',
   },
 };
 
@@ -35,11 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased min-h-screen bg-background text-foreground`}>
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
-

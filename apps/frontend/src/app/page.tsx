@@ -1,18 +1,14 @@
-import { APP_CONFIG } from "@/config/app";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { APP_CONFIG } from '@/config/app';
 
 export default function HomePage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold tracking-tighter">
-            {APP_CONFIG.name}
-          </CardTitle>
-          <CardDescription>
-            Version {APP_CONFIG.version}
-          </CardDescription>
+          <CardTitle className="text-3xl font-bold tracking-tighter">{APP_CONFIG.name}</CardTitle>
+          <CardDescription>Version {APP_CONFIG.version}</CardDescription>
         </CardHeader>
         <CardContent>
           <Separator className="my-4" />
@@ -31,4 +27,3 @@ export default function HomePage() {
     </div>
   );
 }
-

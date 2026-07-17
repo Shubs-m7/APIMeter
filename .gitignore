@@ -7,3 +7,10 @@ coverage
 .env
 .env.local
 .DS_Store
+
+# Environment files
+.env.*
+
+# Prisma
+prisma/*.db*
+*.tsbuildinfo

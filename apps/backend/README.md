@@ -1,9 +1,11 @@
 # APIMeter - Express Backend
 
 ## Architecture
+
 Standalone Express.js 5 API in TypeScript.
 
 ## Folder Structure
+
 ```
 src/
   app.ts           # Express application configuration
@@ -17,6 +19,7 @@ src/
 ```
 
 ## Commands
+
 - `pnpm dev`: Start the server in development mode using `tsx`
 - `pnpm build`: Compile TypeScript to `dist/`
 - `pnpm start`: Run the compiled server
@@ -25,6 +28,6 @@ src/
 - `pnpm clean`: Remove `dist/`
 
 ## Development Workflow
+
 1. Environment variables are validated on startup via Zod.
 2. Ensure you have `NODE_ENV=development` to enable pretty logging.
-

@@ -1,6 +1,6 @@
-import { Response } from "express";
+import { Response } from 'express';
 
-export const success = (res: Response, data: any, message = "Success", meta?: any) => {
+export const success = (res: Response, data: any, message = 'Success', meta?: any) => {
   res.status(200).json({
     success: true,
     message,
@@ -9,7 +9,7 @@ export const success = (res: Response, data: any, message = "Success", meta?: an
   });
 };
 
-export const created = (res: Response, data: any, message = "Created", meta?: any) => {
+export const created = (res: Response, data: any, message = 'Created', meta?: any) => {
   res.status(201).json({
     success: true,
     message,
@@ -25,4 +25,3 @@ export const error = (res: Response, message: string, statusCode = 400, errDetai
     error: errDetails,
   });
 };
-

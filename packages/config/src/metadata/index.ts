@@ -1,1 +1,1 @@
-export const SEO_TITLE = "APIMeter Dashboard";
+export const SEO_TITLE = 'APIMeter Dashboard';

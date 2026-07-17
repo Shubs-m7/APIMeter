@@ -1,9 +1,11 @@
 # APIMeter - Next.js Frontend
 
 ## Architecture
+
 Next.js 16 (App Router) with Tailwind CSS v4, Shadcn UI, Zustand, and TanStack Query.
 
 ## Folder Structure
+
 ```
 src/
   app/           # Next.js App Router pages and layouts
@@ -22,8 +24,8 @@ src/
 ```
 
 ## Commands
+
 - `pnpm dev`: Start development server
 - `pnpm build`: Build production app
 - `pnpm lint`: Run ESLint
 - `pnpm typecheck`: Run TS type check
-
