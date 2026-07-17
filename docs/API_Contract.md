@@ -8,7 +8,7 @@
 
 ## SECTION 1 — API OVERVIEW
 
-This document serves as the exact contract for all HTTP communication between the Next.js Client (or external consumers) and the Next.js API Routes (`/api/v1/*`).
+This document serves as the exact contract for all HTTP communication between the Next.js Client (or external consumers) and the Express.js Backend API (`/api/v1/*`).
 
 *   **Base URL:** `https://api.apimeter.com/api/v1` (Production) / `http://localhost:3000/api/v1` (Local)
 *   **Data Format:** JSON exclusively.

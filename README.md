@@ -1,4 +1,4 @@
-# APIMeter
+# APIMeter (v1.2)
 
 **Tagline:** Secure API Key Management & Real-Time Usage Analytics Platform
 
@@ -15,11 +15,12 @@ This project is structured as a **Turborepo** monorepo using **pnpm**.
 ```text
 apimeter/
 ├── apps/
-│   ├── backend/         (Node.js / Express or Next.js API placeholder)
-│   └── frontend/        (Web Application placeholder)
+│   ├── backend/         (Standalone Express.js / TypeScript API)
+│   └── frontend/        (Next.js Web Application)
 ├── packages/
 │   ├── shared-types/    (TypeScript types and interfaces)
 │   ├── shared-utils/    (Common helper functions)
+│   ├── validation/      (Shared Zod schemas & helpers)
 │   ├── eslint-config/   (Shared ESLint configurations)
 │   └── tsconfig/        (Shared TypeScript configurations)
 ├── docs/                (Project documentation)
@@ -52,6 +53,20 @@ apimeter/
 - **Language:** TypeScript
 - **Package Manager:** pnpm
 - **Monorepo Tool:** Turborepo
+- **Backend:** Express.js, Prisma ORM, PostgreSQL, Zod, Pino, Helmet
+- **Frontend:** Next.js
+- **Testing:** Vitest, Supertest
+
+## Sprint 0 Roadmap
+
+- **Task 0.1:** Monorepo Foundation
+- **Task 0.2:** Express Backend Foundation
+- **Task 0.3:** Next.js Frontend Foundation
+- **Task 0.4:** Shared Packages
+- **Task 0.5:** PostgreSQL + Prisma
+- **Task 0.6:** Authentication Foundation
+- **Task 0.7:** Developer Tooling
+- **Task 0.8:** Sprint Review
 
 ## Development Workflow
 
@@ -60,4 +75,4 @@ We use standard Turborepo commands for development:
 - `pnpm build`: Build all apps and packages.
 - `pnpm lint`: Run ESLint across the workspace.
 - `pnpm typecheck`: Run TypeScript compilation check.
-- `pnpm test`: Run tests.
+- `pnpm test`: Run Vitest tests across the workspace.

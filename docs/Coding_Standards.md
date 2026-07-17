@@ -2,7 +2,7 @@
 
 **Project:** APIMeter
 **Tagline:** Secure API Key Management & Real-Time Usage Analytics Platform
-**Version:** 1.1
+**Version:** 1.2
 
 ---
 
@@ -10,12 +10,12 @@
 
 Folder names must be lowercase and use `kebab-case`. Never abbreviate folder names.
 
-*   `modules/` (Feature boundaries)
+*   `modules/` (Feature boundaries inside src)
     *   `api-requests/` (Standardized domain for raw logs)
     *   `projects/`
     *   `api-keys/`
-*   `lib/` (Shared internal libraries)
-*   `validators/` (Zod schemas)
+*   `shared/` (Shared utilities, errors, responses)
+*   `middleware/` (Global Express middlewares)
 
 ---
 
@@ -29,7 +29,7 @@ Folder names must be lowercase and use `kebab-case`. Never abbreviate folder nam
 
 ## SECTION 3 — Coding Standards Decisions (Architecture Decision Records)
 
-*(Generated from Architecture Revision v1.1)*
+*(Generated from Architecture Revision v1.2)*
 *   **ADR-CODE-1:** Security standards mandated to include key hashing. **Reason:** To align with Backend security constraints preventing plaintext API key storage. **Status:** Approved.
 *   **ADR-CODE-2:** Module naming `api-requests` strictly mandated. **Reason:** Domain alignment. **Status:** Approved.
 
