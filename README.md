@@ -77,3 +77,39 @@ We use standard Turborepo commands for development:
 - `pnpm lint`: Run ESLint across the workspace.
 - `pnpm typecheck`: Run TypeScript compilation check.
 - `pnpm test`: Run Vitest tests across the workspace.
+
+## Git Workflow & Commit Standards
+
+This repository enforces strict code quality and commit message standards through Git hooks (Husky).
+
+### Git Hooks
+
+- **pre-commit**: Formats staged files (`prettier`), lints staged files (`eslint --fix`), and performs a workspace-wide typecheck (`pnpm run typecheck`). The commit will abort if any errors are encountered.
+- **commit-msg**: Enforces the Conventional Commits specification for all commit messages.
+
+### Commit Message Format
+
+Commits must follow [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<scope>): <subject>
+```
+
+**Examples:**
+
+- `feat(auth): add login endpoint`
+- `fix(api): resolve validation bug`
+- `docs(readme): update setup guide`
+- `refactor(database): simplify Prisma client`
+- `test(auth): add login integration tests`
+- `chore(tooling): update ESLint`
+
+### Bypassing Hooks
+
+_Warning: Bypassing hooks is heavily discouraged and should only be used in emergencies to unblock critical production issues._
+
+To bypass the hooks, append the `--no-verify` flag to your commit command:
+
+```bash
+git commit -m "fix(critical): emergency patch" --no-verify
+```
