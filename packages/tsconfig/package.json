@@ -1,5 +1,11 @@
 {
   "name": "@apimeter/tsconfig",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "files": [
+    "base.json",
+    "node.json",
+    "next.json",
+    "strict.json"
+  ]
 }

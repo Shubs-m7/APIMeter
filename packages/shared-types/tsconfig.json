@@ -1,0 +1,10 @@
+{
+  "extends": "@apimeter/tsconfig/strict.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ]
+}

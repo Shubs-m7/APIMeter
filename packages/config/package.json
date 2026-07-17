@@ -1,5 +1,5 @@
 {
-  "name": "@apimeter/shared-types",
+  "name": "@apimeter/config",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",

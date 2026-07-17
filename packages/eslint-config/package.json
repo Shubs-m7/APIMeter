@@ -2,5 +2,10 @@
   "name": "@apimeter/eslint-config",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js"
+  "main": "base.js",
+  "files": [
+    "base.js",
+    "frontend.js",
+    "backend.js"
+  ]
 }

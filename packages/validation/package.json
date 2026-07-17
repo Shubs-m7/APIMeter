@@ -1,10 +1,13 @@
 {
-  "name": "@apimeter/shared-types",
+  "name": "@apimeter/validation",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",
   "scripts": {
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
